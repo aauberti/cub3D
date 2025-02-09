@@ -6,7 +6,7 @@
 /*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 08:57:36 by ebervas           #+#    #+#             */
-/*   Updated: 2025/01/29 13:02:07 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/09 16:16:19 by aauberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1028
+#  define BUFFER_SIZE 1
 # endif
 
 # define MAX_FD 1024

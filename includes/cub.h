@@ -15,22 +15,17 @@ typedef struct s_color
 
 typedef struct s_data
 {
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	t_color	*F;
-	t_color	*C;
+	char	*path_NO;
+	char	*path_SO;
+	char	*path_WE;
+	char	*path_EA;
+	t_color	*F_color;
+	t_color	*C_color;
 }	t_data;
-
-
-
-
-
 
 //Parsing
 bool	check_param(int ac, char **av);
-bool	init_data(t_data *data, char *av);
+t_data    *init_data(char *av);
 
 
 #endif

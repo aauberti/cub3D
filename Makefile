@@ -8,27 +8,8 @@ OBJ_PATH = ./objects/
 INC_PATH = ./includes/
 
 SRC		= 	main.c \
-			NAME	= cub3D
-
-CC		= clang
-CFLAGS	= -Werror -Wextra -Wall -g
-
-SRC_PATH = ./sources/
-OBJ_PATH = ./objects/
-INC_PATH = ./includes/
-
-SRC		= 	main.c \
-			NAME	= cub3D
-
-CC		= clang
-CFLAGS	= -Werror -Wextra -Wall -g
-
-SRC_PATH = ./sources/
-OBJ_PATH = ./objects/
-INC_PATH = ./includes/
-
-SRC		= 	main.c \
-			parsing/check_map.c\
+			parsing/check_map.c \
+			parsing/init_data.c \
 			
 
 OBJS	= $(addprefix $(OBJ_PATH), $(SRC:.c=.o))
