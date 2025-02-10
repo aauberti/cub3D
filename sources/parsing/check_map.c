@@ -19,8 +19,10 @@ bool	check_param(int ac, char **av)
 	ext = ft_substr(av[1], len - 4, 4);
 	if (ft_strcmp(ext, ".cub"))
 	{
+		free(ext);
 		ft_putstr_fd("Error\nUse a .cub file\n", 2);
 		return (false);
 	}
+	free(ext);
 	return (true);
 }

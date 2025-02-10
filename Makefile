@@ -1,6 +1,7 @@
 NAME	= cub3D
 
-CC		= clang
+MFLAGS = --no-print-directory
+CC		= cc
 CFLAGS	= -Werror -Wextra -Wall -g
 
 SRC_PATH = ./sources/
@@ -10,6 +11,8 @@ INC_PATH = ./includes/
 SRC		= 	main.c \
 			parsing/check_map.c \
 			parsing/init_data.c \
+			parsing/valid_path.c \
+			parsing/valid_color.c \
 			
 
 OBJS	= $(addprefix $(OBJ_PATH), $(SRC:.c=.o))
@@ -31,17 +34,17 @@ $(NAME): $(LIBFT) $(OBJS)
 
 $(LIBFT):
 	@echo "Making libft..."
-	@make -C $(LIBFT_PATH)
+	@make $(MFLAGS) -C $(LIBFT_PATH)
 
 clean:
 	@echo "Cleaning object files..."
 	@rm -rf $(OBJ_PATH)
-	@make -C $(LIBFT_PATH) clean
+	@make $(MFLAGS) -C $(LIBFT_PATH) clean
 
 fclean: clean
 	@echo "Cleaning executable..."
 	@rm -f $(NAME)
-	@make -C $(LIBFT_PATH) fclean
+	@make $(MFLAGS) -C $(LIBFT_PATH) fclean
 
 re: fclean all
 

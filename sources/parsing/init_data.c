@@ -22,61 +22,6 @@ static t_data *create_and_init_data(void)
     return (data);
 }
 
-static bool	valid_param2(t_data *data, char *line)
-{
-    int i;
-
-    i = 2;
-    if (line[0] == 'W' && line[1] == 'E')
-    {
-        if (data->path_WE)
-            return (false);
-        while (ft_isspace(line[i]))
-            i++;
-        data->path_WE = ft_substr(line, i, ft_strlen(&line[i]) - 1);
-        if (!data->path_WE)
-            return (false);
-    }
-    else if (line[0] == 'E' && line[1] == 'A')
-    {
-        if (data->path_EA)
-            return (false);
-        while (ft_isspace(line[i]))
-            i++;
-        data->path_EA = ft_substr(line, i, ft_strlen(&line[i]) - 1);
-        if (!data->path_EA)
-            return (false);
-    }
-    return (true);
-}
-
-static bool	valid_param(t_data *data, char *line, int i)
-{
-    if (line[0] == 'N' && line[1] == 'O')
-    {
-        if (data->path_NO)
-            return (false);
-        while (ft_isspace(line[i]))
-            i++;
-        data->path_NO = ft_substr(line, i, ft_strlen(&line[i]) - 1);
-        if (!data->path_NO)
-            return (false);
-    }
-    else if (line[0] == 'S' && line[1] == 'O')
-    {
-        if (data->path_SO)
-            return (false);
-        while (ft_isspace(line[i]))
-            i++;
-        data->path_SO = ft_substr(line, i, ft_strlen(&line[i]) - 1);
-        if (!data->path_SO)
-            return (false);
-    }
-    else if (!valid_param2(data, line))
-        return (false);
-    return (true);
-}
-
 t_data    *init_data(char *av)
 {
     t_data  *data;
@@ -94,7 +39,10 @@ t_data    *init_data(char *av)
         line = get_next_line(fd);
         if (line == NULL)
             return (data);
-        if (!valid_param(data, line, 2)) 
+                // Check if line start NO SO EA WE C F
+        if (!valid_path_SO(data, line) || !valid_path_NO(data, line)
+            || !valid_path_EA(data, line) || !valid_path_WE(data, line)
+            || !valid_color(data, line)) 
         {
             ft_putstr_fd("Error\nBad element in the map file\n", 2);
             free(line);
