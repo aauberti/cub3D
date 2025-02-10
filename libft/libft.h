@@ -6,7 +6,7 @@
 /*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 08:57:36 by ebervas           #+#    #+#             */
-/*   Updated: 2025/02/09 16:16:19 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/10 22:45:28 by aauberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include "colors.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1

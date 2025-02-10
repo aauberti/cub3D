@@ -1,6 +1,6 @@
 #include "cub.h"
 
-bool	valid_path_NO(t_data *data, char *line)
+static bool	valid_path_NO(t_data *data, char *line)
 {
 	char	*tmp;
     int     i;
@@ -24,7 +24,7 @@ bool	valid_path_NO(t_data *data, char *line)
     return (true);
 }
 
-bool	valid_path_SO(t_data *data, char *line)
+static bool	valid_path_SO(t_data *data, char *line)
 {
 	char	*tmp;
     int     i;
@@ -48,7 +48,7 @@ bool	valid_path_SO(t_data *data, char *line)
     return (true);
 }
 
-bool	valid_path_WE(t_data *data, char *line)
+static bool	valid_path_WE(t_data *data, char *line)
 {
 	char	*tmp;
     int     i;
@@ -72,7 +72,7 @@ bool	valid_path_WE(t_data *data, char *line)
     return (true);
 }
 
-bool	valid_path_EA(t_data *data, char *line)
+static bool	valid_path_EA(t_data *data, char *line)
 {
 	char	*tmp;
     int     i;
@@ -96,3 +96,10 @@ bool	valid_path_EA(t_data *data, char *line)
     return (true);
 }
 
+bool    valid_path(t_data *data, char *line)
+{
+    if (!valid_path_SO(data, line) || !valid_path_NO(data, line)
+        || !valid_path_EA(data, line) || !valid_path_WE(data, line))
+        return (false);
+    return (true);
+}

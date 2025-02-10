@@ -85,7 +85,7 @@ bool	valid_color(t_data *data, char *line)
 		i++;
 	if (line[i] == 'F')
 	{
-		if (data->F_color->b != 0 || data->F_color->g != 0|| data->F_color->r != 0)
+		if (data->F_color->b != -1 || data->F_color->g != -1 || data->F_color->r != -1)
 			return (false);
 		tmp = ft_substr(line, i + 1, ft_strlen(&line[i]) - 1);
 		if (!split_rgb_F_color(data, tmp))
@@ -93,7 +93,7 @@ bool	valid_color(t_data *data, char *line)
 	}
 	else if (line[i] == 'C')
 	{
-		if (data->C_color->b != 0 || data->C_color->g != 0|| data->C_color->r != 0)
+		if (data->C_color->b != -1 || data->C_color->g != -1 || data->C_color->r != -1 )
 			return (false);
 		tmp = ft_substr(line, i + 1, ft_strlen(&line[i]) - 1);
 		if (!split_rgb_C_color(data, tmp))
