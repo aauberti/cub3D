@@ -34,7 +34,7 @@ static bool	split_rgb_F_color(t_data *data, char *rgb)
 
 	i = 0;
 	error = true;
-	tmp = ft_strtrim(rgb, WHITESPACES);
+	tmp = ft_strtrim(rgb, SPACES);
 	color = ft_split(tmp, ',');
 	while (color && color[i])
 		i++;
@@ -59,7 +59,7 @@ static bool	split_rgb_C_color(t_data *data, char *rgb)
 
 	i = 0;
 	error = true;
-	tmp = ft_strtrim(rgb, WHITESPACES);
+	tmp = ft_strtrim(rgb, SPACES);
 	color = ft_split(tmp, ',');
 	while (color && color[i])
 		i++;

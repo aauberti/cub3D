@@ -13,6 +13,8 @@ SRC		= 	main.c \
 			parsing/init_data.c \
 			parsing/valid_path.c \
 			parsing/valid_color.c \
+			parsing/valid_map.c \
+			
 			
 
 OBJS	= $(addprefix $(OBJ_PATH), $(SRC:.c=.o))

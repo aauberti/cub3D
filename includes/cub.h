@@ -6,7 +6,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-# define WHITESPACES " \t\v\r\f\n"
+# define SPACES " \n"
 
 typedef struct s_color
 {
@@ -23,15 +23,15 @@ typedef struct s_data
 	char	*path_EA;
 	t_color	*F_color;
 	t_color	*C_color;
+	char	**map;
 }	t_data;
 
 //Parsing
 bool	check_param(int ac, char **av);
 t_data    *init_data(char *av);
-
 bool    valid_path(t_data *data, char *line);
-
 bool	valid_color(t_data *data, char *line);
+bool valid_map(t_data *data, char *line);
 
 
 #endif

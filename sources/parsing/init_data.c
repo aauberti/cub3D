@@ -2,7 +2,7 @@
 
 static t_data *create_and_init_data(void)
 {
-	t_data	*data;
+    t_data *data;
 
     data = malloc(sizeof(t_data));
     if (!data)
@@ -65,7 +65,9 @@ t_data    *init_data(char *av)
     t_data  *data;
     int     fd;
     char    *line;
+    char    *line_map;
 
+    line_map = NULL;
     data = create_and_init_data();
     if (!data)
         return (NULL);
@@ -76,7 +78,10 @@ t_data    *init_data(char *av)
     {
         line = get_next_line(fd);
         if (line == NULL)
+        {
+            printf("%s", line_map);
             return (data);
+        }
         if (!all_param_fill(data))
         {
             if (valid_line(line))
@@ -97,6 +102,12 @@ t_data    *init_data(char *av)
             free(line);
         }
         else
-            printf("OKOK\n");
+        {
+            if (line[0] == '\n')
+                continue ;
+            line_map = ft_strjoin(line_map, line);
+        }
     }
+    return (data);
 }
+

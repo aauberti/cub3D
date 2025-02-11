@@ -16,7 +16,7 @@ static bool	valid_path_NO(t_data *data, char *line)
         tmp = ft_substr(line, i, ft_strlen(&line[i]) - 1);
         if (!tmp)
             return (false);
-		data->path_NO = ft_strtrim(tmp, WHITESPACES);
+		data->path_NO = ft_strtrim(tmp, SPACES);
         free(tmp);
         if (!data->path_NO)
             return (false);
@@ -40,7 +40,7 @@ static bool	valid_path_SO(t_data *data, char *line)
         tmp = ft_substr(line, i, ft_strlen(&line[i]) - 1);
         if (!tmp)
             return (false);
-		data->path_SO = ft_strtrim(tmp, WHITESPACES);
+		data->path_SO = ft_strtrim(tmp, SPACES);
         free(tmp);
         if (!data->path_SO)
             return (false);
@@ -64,7 +64,7 @@ static bool	valid_path_WE(t_data *data, char *line)
         tmp = ft_substr(line, i, ft_strlen(&line[i]) - 1);
         if (!tmp)
             return (false);
-		data->path_WE = ft_strtrim(tmp, WHITESPACES);
+		data->path_WE = ft_strtrim(tmp, SPACES);
         free(tmp);
         if (!data->path_WE)
             return (false);
@@ -88,7 +88,7 @@ static bool	valid_path_EA(t_data *data, char *line)
         tmp = ft_substr(line, i, ft_strlen(&line[i]) - 1);
         if (!tmp)
             return (false);
-		data->path_EA = ft_strtrim(tmp, WHITESPACES);
+		data->path_EA = ft_strtrim(tmp, SPACES);
         free(tmp);
         if (!data->path_EA)
             return (false);
