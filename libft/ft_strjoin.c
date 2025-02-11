@@ -6,13 +6,13 @@
 /*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:28:16 by aauberti          #+#    #+#             */
-/*   Updated: 2025/02/11 13:35:11 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:17:03 by aauberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	int		len_total;
 	int		i;

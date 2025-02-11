@@ -14,6 +14,7 @@ SRC		= 	main.c \
 			parsing/valid_path.c \
 			parsing/valid_color.c \
 			parsing/valid_map.c \
+			free_data.c \
 			
 			
 

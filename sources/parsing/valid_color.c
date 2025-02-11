@@ -35,7 +35,9 @@ static bool	split_rgb_F_color(t_data *data, char *rgb)
 	i = 0;
 	error = true;
 	tmp = ft_strtrim(rgb, SPACES);
+	free(rgb);
 	color = ft_split(tmp, ',');
+	free(tmp);
 	while (color && color[i])
 		i++;
 	if (i != 3)
@@ -45,6 +47,7 @@ static bool	split_rgb_F_color(t_data *data, char *rgb)
 	data->F_color->r = convert_string_to_long(color[0], &error);
 	data->F_color->g = convert_string_to_long(color[1], &error);
 	data->F_color->b = convert_string_to_long(color[2], &error);
+	free_string_array(color);
 	if (!error)
 		return(false);
 	return (true);
@@ -60,7 +63,9 @@ static bool	split_rgb_C_color(t_data *data, char *rgb)
 	i = 0;
 	error = true;
 	tmp = ft_strtrim(rgb, SPACES);
+	free(rgb);
 	color = ft_split(tmp, ',');
+	free(tmp);
 	while (color && color[i])
 		i++;
 	if (i != 3)
@@ -70,6 +75,7 @@ static bool	split_rgb_C_color(t_data *data, char *rgb)
 	data->C_color->r = convert_string_to_long(color[0], &error);
 	data->C_color->g = convert_string_to_long(color[1], &error);
 	data->C_color->b = convert_string_to_long(color[2], &error);
+	free_string_array(color);
 	if (!error)
 		return(false);
 	return (true);

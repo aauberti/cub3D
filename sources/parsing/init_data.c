@@ -66,6 +66,7 @@ t_data    *init_data(char *av)
     int     fd;
     char    *line;
     char    *line_map;
+    char    *tmp;
 
     line_map = NULL;
     data = create_and_init_data();
@@ -78,11 +79,8 @@ t_data    *init_data(char *av)
     {
         line = get_next_line(fd);
         if (line == NULL)
-        {
-            printf("%s", line_map);
-            return (data);
-        }
-        if (!all_param_fill(data))
+            break ;
+        else if (!all_param_fill(data))
         {
             if (valid_line(line))
             {
@@ -99,15 +97,28 @@ t_data    *init_data(char *av)
                 free(line);
                 return (NULL);
             }
-            free(line);
         }
         else
         {
             if (line[0] == '\n')
+            {
+                free(line);
                 continue ;
-            line_map = ft_strjoin(line_map, line);
+            }
+            if (line_map == NULL)
+			    line_map = ft_strdup(line);
+            else
+		    {
+			    tmp = ft_strjoin(line_map, line);
+			    free(line_map);
+			    line_map = ft_strdup(tmp);
+			    free(tmp);
+		    }
         }
+       free(line);
     }
+    printf("%s\n", line_map);
+    free(line_map);
     return (data);
 }
 

@@ -23,6 +23,7 @@ typedef struct s_data
 	char	*path_EA;
 	t_color	*F_color;
 	t_color	*C_color;
+	char	*map_line;
 	char	**map;
 }	t_data;
 
@@ -32,6 +33,11 @@ t_data    *init_data(char *av);
 bool    valid_path(t_data *data, char *line);
 bool	valid_color(t_data *data, char *line);
 bool valid_map(t_data *data, char *line);
+
+//free
+void	free_ptr(void *ptr);
+void	free_string_array(char **array);
+void free_data(t_data *data);
 
 
 #endif

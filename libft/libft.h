@@ -6,7 +6,7 @@
 /*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 08:57:36 by ebervas           #+#    #+#             */
-/*   Updated: 2025/02/10 22:45:28 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:01:15 by aauberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char				*ft_itoa(int n);
 char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				**ft_split(char const *s, char c);
-char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin(char *s1, char const *s2);
 char				*ft_strdup(const char *s);
 char				*ft_strrchr(const char *str, int c);
 char				*ft_strchr(const char *s, int c);
