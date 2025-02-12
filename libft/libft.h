@@ -43,7 +43,6 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *str1, const void *str2, size_t n);
 int					ft_atoi(const char *str);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-char				*get_next_line(int fd);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_itoa(int n);
 char				*ft_strtrim(char const *s1, char const *set);
@@ -79,5 +78,16 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
+
+//gnl
+void				*ft_memcpy_gnl(void *dest, const void *src, size_t n);
+char				*ft_strdup_gnl(const char *s);
+char				*ft_strchr_gnl(char *s, int c);
+char				*ft_strjoin_gnl(char const *s1, char const *s2);
+char				*ft_read_line(int fd, char *str);
+char				*ft_line(char *str);
+char				*ft_rest(char *str);
+char				*get_next_line(int fd);
+int					ft_read_data(int fd, char **str);
 
 #endif

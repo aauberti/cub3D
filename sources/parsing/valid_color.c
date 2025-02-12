@@ -25,7 +25,7 @@ static int	convert_string_to_long(const char *str, bool *error)
 	return (nbr);
 }
 
-static bool	split_rgb_F_color(t_data *data, char *rgb)
+static bool	split_rgb_f_color(t_data *data, char *rgb)
 {
 	char	*tmp;
 	char	**color;
@@ -34,7 +34,7 @@ static bool	split_rgb_F_color(t_data *data, char *rgb)
 
 	i = 0;
 	error = true;
-	tmp = ft_strtrim(rgb, SPACES);
+	tmp = ft_strtrim(rgb, " \n");
 	free(rgb);
 	color = ft_split(tmp, ',');
 	free(tmp);
@@ -49,11 +49,11 @@ static bool	split_rgb_F_color(t_data *data, char *rgb)
 	data->F_color->b = convert_string_to_long(color[2], &error);
 	free_string_array(color);
 	if (!error)
-		return(false);
+		return (false);
 	return (true);
 }
 
-static bool	split_rgb_C_color(t_data *data, char *rgb)
+static bool	split_rgb_c_color(t_data *data, char *rgb)
 {
 	char	*tmp;
 	char	**color;
@@ -62,7 +62,7 @@ static bool	split_rgb_C_color(t_data *data, char *rgb)
 
 	i = 0;
 	error = true;
-	tmp = ft_strtrim(rgb, SPACES);
+	tmp = ft_strtrim(rgb, " \n");
 	free(rgb);
 	color = ft_split(tmp, ',');
 	free(tmp);
@@ -77,7 +77,7 @@ static bool	split_rgb_C_color(t_data *data, char *rgb)
 	data->C_color->b = convert_string_to_long(color[2], &error);
 	free_string_array(color);
 	if (!error)
-		return(false);
+		return (false);
 	return (true);
 }
 
@@ -91,18 +91,20 @@ bool	valid_color(t_data *data, char *line)
 		i++;
 	if (line[i] == 'F')
 	{
-		if (data->F_color->b != -1 || data->F_color->g != -1 || data->F_color->r != -1)
+		if (data->F_color->b != -1 || data->F_color->g != -1
+			|| data->F_color->r != -1)
 			return (false);
 		tmp = ft_substr(line, i + 1, ft_strlen(&line[i]) - 1);
-		if (!split_rgb_F_color(data, tmp))
+		if (!split_rgb_f_color(data, tmp))
 			return (false);
 	}
 	else if (line[i] == 'C')
 	{
-		if (data->C_color->b != -1 || data->C_color->g != -1 || data->C_color->r != -1 )
+		if (data->C_color->b != -1 || data->C_color->g != -1
+			|| data->C_color->r != -1)
 			return (false);
 		tmp = ft_substr(line, i + 1, ft_strlen(&line[i]) - 1);
-		if (!split_rgb_C_color(data, tmp))
+		if (!split_rgb_c_color(data, tmp))
 			return (false);
 	}
 	return (true);

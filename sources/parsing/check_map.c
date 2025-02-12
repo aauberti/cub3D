@@ -2,8 +2,8 @@
 
 bool	check_param(int ac, char **av)
 {
-	int	len;
-	char *ext;
+	int		len;
+	char	*ext;
 
 	if (ac != 2)
 	{

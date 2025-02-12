@@ -30,7 +30,7 @@ void	free_string_array(char **array)
 	}
 }
 
-void free_data(t_data *data)
+void	free_data(t_data *data)
 {
 	free(data->path_NO);
 	free(data->path_SO);
@@ -38,5 +38,6 @@ void free_data(t_data *data)
 	free(data->path_EA);
 	free(data->C_color);
 	free(data->F_color);
+	free(data->map_line);
 	free(data);
 }
