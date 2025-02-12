@@ -7,13 +7,19 @@
 # include <fcntl.h>
 # include "../minilibx-linux/mlx.h"
 
-
 typedef struct s_color
 {
 	int	r;
 	int	g;
 	int	b;
 }	t_color;
+
+typedef struct s_map
+{
+    char    **map;
+    int     height;
+    int     *widths;
+} t_map;
 
 typedef struct s_data
 {
@@ -24,7 +30,6 @@ typedef struct s_data
 	t_color	*F_color;
 	t_color	*C_color;
 	char	*map_line;
-	char	**map;
 }	t_data;
 
 //Parsing
