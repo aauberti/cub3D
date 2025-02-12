@@ -15,7 +15,7 @@ LIBFT_PATH = ./libft/
 LIBFT = ./libft/libft.a
 
 SRC		= 	main.c \
-			parsing/check_map.c \
+			parsing/check_param.c \
 			parsing/init_data.c \
 			parsing/valid_path.c \
 			parsing/valid_color.c \
