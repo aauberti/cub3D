@@ -21,6 +21,10 @@ SRC		= 	main.c \
 			parsing/valid_color.c \
 			parsing/parse_elem.c \
 			free_data.c \
+			parsing/parse_map.c \
+			parsing/check_cell.c \
+			parsing/parsing_utils.c \
+
 			
 			
 

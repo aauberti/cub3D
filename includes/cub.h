@@ -26,6 +26,13 @@ typedef struct s_data
 	char	**map;
 }	t_data;
 
+typedef struct s_param
+{
+	int		i;
+	int		height;
+	int		prev_len;
+}		t_param;
+
 //Parsing
 bool	check_param(int ac, char **av);
 t_data   *init_data(int fd);
@@ -36,9 +43,13 @@ t_data	*parse_map(t_data *data, char *line, int fd);
 int		parse_file(t_data *data, char *line);
 bool	valid_line(char *line);
 bool	all_param_fill(t_data *data);
+bool	fill_map(t_data *data);
+int check_cell(char **map, int j, int curr_len, t_param *param);
+bool	ft_valid_char(char c, char *charset);
+bool error_in_map(t_data *data , char *tmp);
+bool	valid_start(char *str);
 
-//free
-//void	free_ptr(void *ptr);
+
 void	free_string_array(char **array);
 void	free_data(t_data *data);
 bool 	free_false(char *str);
