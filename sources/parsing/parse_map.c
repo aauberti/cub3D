@@ -1,9 +1,9 @@
 #include "cub.h"
 
-static int check_line(char **map,t_param *param)
+static int	check_line(char **map, t_param *param)
 {
-	int j;
-	int curr_len;
+	int	j;
+	int	curr_len;
 
 	curr_len = ft_strlen(map[param->i]);
 	j = 0;
@@ -16,14 +16,14 @@ static int check_line(char **map,t_param *param)
 	return (curr_len);
 }
 
-static int check_map(char **map)
+static int	check_map(char **map)
 {
 	t_param	*param;
 
 	if (!map || !map[0])
 		return (0);
 	param = malloc(sizeof(t_param));
-	if(!param)
+	if (!param)
 		return (0);
 	param->height = 0;
 	while (map[param->height])
@@ -44,16 +44,17 @@ static int check_map(char **map)
 	return (1);
 }
 
-static bool error_open_map(t_data *data)
+static bool	error_open_map(t_data *data)
 {
 	free_data(data);
 	ft_putstr_fd("Error\nMap open\n", 2);
 	return (false);
 }
+
 bool	fill_map(t_data *data)
 {
-	char    *tmp;
-	int 	i;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = ft_strtrim(data->map_line, "\n");
@@ -66,7 +67,7 @@ bool	fill_map(t_data *data)
 		if (!ft_valid_char(tmp[i], " \n01NSWE"))
 			return (error_in_map(data, tmp));
 		if (tmp[i] == '\n' && tmp[i + 1] == '\n')
-		 	return (error_in_map(data, tmp));
+			return (error_in_map(data, tmp));
 		i++;
 	}
 	data->map = ft_split(tmp, '\n');

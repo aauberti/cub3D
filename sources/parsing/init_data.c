@@ -8,21 +8,20 @@ static t_data	*create_and_init_data(void)
 	if (!data)
 		return (NULL);
 	ft_memset(data, 0, sizeof(t_data));
-	data->C_color = malloc(sizeof(t_color));
-	data->F_color = malloc(sizeof(t_color));
-	if (!data->C_color || !data->F_color)
+	data->c_color = malloc(sizeof(t_color));
+	data->f_color = malloc(sizeof(t_color));
+	if (!data->c_color || !data->f_color)
 	{
-		free(data->C_color);
-		free(data->F_color);
+		free(data->c_color);
+		free(data->f_color);
 		free(data);
 		return (NULL);
 	}
-	ft_memset(data->C_color, -1, sizeof(t_color));
-	ft_memset(data->F_color, -1, sizeof(t_color));
+	ft_memset(data->c_color, -1, sizeof(t_color));
+	ft_memset(data->f_color, -1, sizeof(t_color));
 	data->map_line = NULL;
 	return (data);
 }
-
 
 bool	valid_line(char *line)
 {
@@ -53,13 +52,13 @@ bool	all_param_fill(t_data *data)
 	bool	ret;
 
 	ret = true;
-	if (!data->path_EA || !data->path_NO || !data->path_SO || !data->path_WE)
+	if (!data->path_ea || !data->path_no || !data->path_so || !data->path_we)
 		ret = false;
-	if (data->C_color->r == -1 && data->C_color->g == -1
-		&& data->C_color->b == -1)
+	if (data->c_color->r == -1 && data->c_color->g == -1
+		&& data->c_color->b == -1)
 		ret = false;
-	if (data->F_color->r == -1 && data->F_color->g == -1
-		&& data->F_color->b == -1)
+	if (data->f_color->r == -1 && data->f_color->g == -1
+		&& data->f_color->b == -1)
 		ret = false;
 	return (ret);
 }

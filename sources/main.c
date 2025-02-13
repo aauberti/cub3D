@@ -18,11 +18,7 @@ int	main(int ac, char **av)
 	if (!data)
 		return (1);
 	if (!fill_map(data))
-	{
-
 		return (1);
-	}
-
 	free_data(data);
 	return (0);
 }

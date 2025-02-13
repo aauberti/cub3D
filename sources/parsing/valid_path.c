@@ -11,14 +11,14 @@ static bool	valid_path_no(t_data *data, char *line)
 	if (line[i] == 'N' && line[i + 1] == 'O')
 	{
 		i = i + 2;
-		if (data->path_NO)
+		if (data->path_no)
 			return (false);
 		tmp = ft_substr(line, i, ft_strlen(&line[i]) - 1);
 		if (!tmp)
 			return (false);
-		data->path_NO = ft_strtrim(tmp, " \n");
+		data->path_no = ft_strtrim(tmp, " \n");
 		free(tmp);
-		if (!data->path_NO)
+		if (!data->path_no)
 			return (false);
 	}
 	return (true);
@@ -35,14 +35,14 @@ static bool	valid_path_so(t_data *data, char *line)
 	if (line[i] == 'S' && line[i + 1] == 'O')
 	{
 		i = i + 2;
-		if (data->path_SO)
+		if (data->path_so)
 			return (false);
 		tmp = ft_substr(line, i, ft_strlen(&line[i]) - 1);
 		if (!tmp)
 			return (false);
-		data->path_SO = ft_strtrim(tmp, " \n");
+		data->path_so = ft_strtrim(tmp, " \n");
 		free(tmp);
-		if (!data->path_SO)
+		if (!data->path_so)
 			return (false);
 	}
 	return (true);
@@ -59,14 +59,14 @@ static bool	valid_path_we(t_data *data, char *line)
 	if (line[i] == 'W' && line[i + 1] == 'E')
 	{
 		i = i + 2;
-		if (data->path_WE)
+		if (data->path_we)
 			return (false);
 		tmp = ft_substr(line, i, ft_strlen(&line[i]) - 1);
 		if (!tmp)
 			return (false);
-		data->path_WE = ft_strtrim(tmp, " \n");
+		data->path_we = ft_strtrim(tmp, " \n");
 		free(tmp);
-		if (!data->path_WE)
+		if (!data->path_we)
 			return (false);
 	}
 	return (true);
@@ -83,14 +83,14 @@ static bool	valid_path_ea(t_data *data, char *line)
 	if (line[i] == 'E' && line[i + 1] == 'A')
 	{
 		i = i + 2;
-		if (data->path_EA)
+		if (data->path_ea)
 			return (false);
 		tmp = ft_substr(line, i, ft_strlen(&line[i]) - 1);
 		if (!tmp)
 			return (false);
-		data->path_EA = ft_strtrim(tmp, " \n");
+		data->path_ea = ft_strtrim(tmp, " \n");
 		free(tmp);
-		if (!data->path_EA)
+		if (!data->path_ea)
 			return (false);
 	}
 	return (true);

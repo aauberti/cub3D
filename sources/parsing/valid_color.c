@@ -45,9 +45,9 @@ static bool	split_rgb_f_color(t_data *data, char *rgb, int i)
 		free_string_array(color);
 		return (false);
 	}
-	data->F_color->r = convert_string_to_long(color[0], &error);
-	data->F_color->g = convert_string_to_long(color[1], &error);
-	data->F_color->b = convert_string_to_long(color[2], &error);
+	data->f_color->r = convert_string_to_long(color[0], &error);
+	data->f_color->g = convert_string_to_long(color[1], &error);
+	data->f_color->b = convert_string_to_long(color[2], &error);
 	free_string_array(color);
 	if (!error)
 		return (false);
@@ -74,9 +74,9 @@ static bool	split_rgb_c_color(t_data *data, char *rgb, int i)
 		free_string_array(color);
 		return (false);
 	}
-	data->C_color->r = convert_string_to_long(color[0], &error);
-	data->C_color->g = convert_string_to_long(color[1], &error);
-	data->C_color->b = convert_string_to_long(color[2], &error);
+	data->c_color->r = convert_string_to_long(color[0], &error);
+	data->c_color->g = convert_string_to_long(color[1], &error);
+	data->c_color->b = convert_string_to_long(color[2], &error);
 	free_string_array(color);
 	if (!error)
 		return (false);
@@ -93,8 +93,8 @@ bool	valid_color(t_data *data, char *line)
 		i++;
 	if (line[i] == 'F')
 	{
-		if (data->F_color->b != -1 || data->F_color->g != -1
-			|| data->F_color->r != -1)
+		if (data->f_color->b != -1 || data->f_color->g != -1
+			|| data->f_color->r != -1)
 			return (false);
 		tmp = ft_substr(line, i + 1, ft_strlen(&line[i]) - 1);
 		if (!split_rgb_f_color(data, tmp, 0))
@@ -102,8 +102,8 @@ bool	valid_color(t_data *data, char *line)
 	}
 	else if (line[i] == 'C')
 	{
-		if (data->C_color->b != -1 || data->C_color->g != -1
-			|| data->C_color->r != -1)
+		if (data->c_color->b != -1 || data->c_color->g != -1
+			|| data->c_color->r != -1)
 			return (false);
 		tmp = ft_substr(line, i + 1, ft_strlen(&line[i]) - 1);
 		if (!split_rgb_c_color(data, tmp, 0))

@@ -14,17 +14,18 @@ bool	ft_valid_char(char c, char *charset)
 	return (false);
 }
 
-bool error_in_map(t_data *data , char *tmp)
+bool	error_in_map(t_data *data, char *tmp)
 {
 	free(tmp);
 	free_data(data);
 	ft_putstr_fd("Error\nBad element in map\n", 2);
 	return (false);
 }
+
 bool	valid_start(char *str)
 {
 	int	i;
-	int count;
+	int	count;
 
 	count = 0;
 	i = 0;
