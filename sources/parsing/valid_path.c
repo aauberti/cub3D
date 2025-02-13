@@ -6,7 +6,7 @@ static bool	valid_path_no(t_data *data, char *line)
 	int		i;
 
 	i = 0;
-	while (ft_isspace(line[i]))
+	while (line[i] == ' ')
 		i++;
 	if (line[i] == 'N' && line[i + 1] == 'O')
 	{
@@ -30,7 +30,7 @@ static bool	valid_path_so(t_data *data, char *line)
 	int		i;
 
 	i = 0;
-	while (ft_isspace(line[i]))
+	while (line[i] == ' ')
 		i++;
 	if (line[i] == 'S' && line[i + 1] == 'O')
 	{
@@ -54,7 +54,7 @@ static bool	valid_path_we(t_data *data, char *line)
 	int		i;
 
 	i = 0;
-	while (ft_isspace(line[i]))
+	while (line[i] == ' ')
 		i++;
 	if (line[i] == 'W' && line[i + 1] == 'E')
 	{
@@ -78,7 +78,7 @@ static bool	valid_path_ea(t_data *data, char *line)
 	int		i;
 
 	i = 0;
-	while (ft_isspace(line[i]))
+	while (line[i] == ' ')
 		i++;
 	if (line[i] == 'E' && line[i + 1] == 'A')
 	{

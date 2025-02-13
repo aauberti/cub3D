@@ -25,25 +25,26 @@ static int	convert_string_to_long(const char *str, bool *error)
 	return (nbr);
 }
 
-static bool	split_rgb_f_color(t_data *data, char *rgb)
+static bool	split_rgb_f_color(t_data *data, char *rgb, int i)
 {
 	char	*tmp;
 	char	**color;
 	bool	error;
-	int		i;
 
-	i = 0;
 	error = true;
 	tmp = ft_strtrim(rgb, " \n");
 	free(rgb);
+	if (!tmp || (tmp[0] && (tmp[0] == ',' || tmp[ft_strlen(tmp) -1] == ',')))
+		return (free_false(tmp));
 	color = ft_split(tmp, ',');
 	free(tmp);
 	while (color && color[i])
 		i++;
-	if (i != 3)
+	if (!color || i != 3)
+	{
+		free_string_array(color);
 		return (false);
-	if (!color)
-		return (false);
+	}
 	data->F_color->r = convert_string_to_long(color[0], &error);
 	data->F_color->g = convert_string_to_long(color[1], &error);
 	data->F_color->b = convert_string_to_long(color[2], &error);
@@ -53,25 +54,26 @@ static bool	split_rgb_f_color(t_data *data, char *rgb)
 	return (true);
 }
 
-static bool	split_rgb_c_color(t_data *data, char *rgb)
+static bool	split_rgb_c_color(t_data *data, char *rgb, int i)
 {
 	char	*tmp;
 	char	**color;
 	bool	error;
-	int		i;
 
-	i = 0;
 	error = true;
 	tmp = ft_strtrim(rgb, " \n");
 	free(rgb);
+	if (!tmp || (tmp[0] && (tmp[0] == ',' || tmp[ft_strlen(tmp) -1] == ',')))
+		return (free_false(tmp));
 	color = ft_split(tmp, ',');
 	free(tmp);
 	while (color && color[i])
 		i++;
-	if (i != 3)
+	if (!color || i != 3)
+	{
+		free_string_array(color);
 		return (false);
-	if (!color)
-		return (false);
+	}
 	data->C_color->r = convert_string_to_long(color[0], &error);
 	data->C_color->g = convert_string_to_long(color[1], &error);
 	data->C_color->b = convert_string_to_long(color[2], &error);
@@ -95,7 +97,7 @@ bool	valid_color(t_data *data, char *line)
 			|| data->F_color->r != -1)
 			return (false);
 		tmp = ft_substr(line, i + 1, ft_strlen(&line[i]) - 1);
-		if (!split_rgb_f_color(data, tmp))
+		if (!split_rgb_f_color(data, tmp, 0))
 			return (false);
 	}
 	else if (line[i] == 'C')
@@ -104,7 +106,7 @@ bool	valid_color(t_data *data, char *line)
 			|| data->C_color->r != -1)
 			return (false);
 		tmp = ft_substr(line, i + 1, ft_strlen(&line[i]) - 1);
-		if (!split_rgb_c_color(data, tmp))
+		if (!split_rgb_c_color(data, tmp, 0))
 			return (false);
 	}
 	return (true);

@@ -18,16 +18,20 @@ void	free_string_array(char **array)
 	{
 		while (array[i])
 		{
-			if (array[i])
-			{
-				free_ptr(array[i]);
-				array[i] = NULL;
-			}
+
+			free_ptr(array[i]);
+			array[i] = NULL;
 			i++;
 		}
 		free(array);
 		array = NULL;
 	}
+}
+
+bool free_false(char *str)
+{
+	free(str);
+	return(false);
 }
 
 void	free_data(t_data *data)
@@ -39,5 +43,6 @@ void	free_data(t_data *data)
 	free(data->C_color);
 	free(data->F_color);
 	free(data->map_line);
+	free_string_array(data->map);
 	free(data);
-}
+}	

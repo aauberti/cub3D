@@ -8,11 +8,13 @@ int	parse_file(t_data *data, char *line)
 	{
 		if (valid_line(line))
 		{
-			if (!valid_path(data, line) || !valid_color(data, line))
+			if (!valid_color(data, line) || !valid_path(data, line))
 				return (2);
 		}
 		else
+		{
 			return (2);
+		}
 	}
 	else
 		return (1);

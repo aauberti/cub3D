@@ -14,13 +14,6 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
-typedef struct s_map
-{
-    char    **map;
-    int     height;
-    int     *widths;
-} t_map;
-
 typedef struct s_data
 {
 	char	*path_NO;
@@ -30,6 +23,7 @@ typedef struct s_data
 	t_color	*F_color;
 	t_color	*C_color;
 	char	*map_line;
+	char	**map;
 }	t_data;
 
 //Parsing
@@ -44,9 +38,10 @@ bool	valid_line(char *line);
 bool	all_param_fill(t_data *data);
 
 //free
-void	free_ptr(void *ptr);
+//void	free_ptr(void *ptr);
 void	free_string_array(char **array);
 void	free_data(t_data *data);
+bool 	free_false(char *str);
 
 
 #endif

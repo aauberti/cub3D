@@ -23,12 +23,13 @@ static t_data	*create_and_init_data(void)
 	return (data);
 }
 
+
 bool	valid_line(char *line)
 {
 	int	i;
 
 	i = 0;
-	while (line && line[i] && ft_isspace(line[i]))
+	while (line[i] && (line[i] == ' ' || line[i] == '\n'))
 		i++;
 	if (line[i] == '\0')
 		return (true);
@@ -52,7 +53,7 @@ bool	all_param_fill(t_data *data)
 	bool	ret;
 
 	ret = true;
-	if (!data->path_EA && !data->path_NO && !data->path_SO && !data->path_WE)
+	if (!data->path_EA || !data->path_NO || !data->path_SO || !data->path_WE)
 		ret = false;
 	if (data->C_color->r == -1 && data->C_color->g == -1
 		&& data->C_color->b == -1)

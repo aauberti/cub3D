@@ -6,12 +6,12 @@
 /*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:28:44 by aauberti          #+#    #+#             */
-/*   Updated: 2025/02/11 14:55:08 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:45:07 by aauberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 static int	ft_count_word(char *str, char c)
 {
 	int	i;
@@ -64,7 +64,7 @@ static char	**return_array(char const *s, char **array, char c)
 	i = 0;
 	while (*s)
 	{
-		while (*s && *s == c)
+		if (*s && *s == c)
 			s++;
 		if (*s)
 		{
