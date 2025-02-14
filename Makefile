@@ -24,6 +24,7 @@ SRC		= 	main.c \
 			parsing/parse_map.c \
 			parsing/check_cell.c \
 			parsing/parsing_utils.c \
+			draw.c \
 
 			
 			
