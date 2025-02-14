@@ -1,9 +1,9 @@
-C 5,5,255
+C 255,0,0
 
                 
 WE ./image/chien.xpm                  
 
-F 26,255,4
+F 0,0,255
 
 NO            ./image/chat.xpm
 

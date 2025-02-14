@@ -73,7 +73,7 @@ typedef struct s_ray
     int step_x;
     int step_y;
     int side;
-    double perp_wall_dist;
+    double wall_dist;
     int line_height;
     int draw_start;
     int draw_end;
