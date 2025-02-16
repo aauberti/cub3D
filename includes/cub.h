@@ -46,45 +46,45 @@ typedef struct s_img
 
 typedef struct s_img_data
 {
-    char    *addr;
-    int     bits_per_pixel;
-    int     line_length;
-    int     endian;
-}   t_img_data;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}		t_img_data;
 
 typedef struct s_ray 
 {
-    double pos_x;
-    double pos_y;
-    double dir_x;
-    double dir_y;
-    double plane_x;
-    double plane_y;
-    double camera_x;
-    double ray_dir_x;
-    double ray_dir_y;
-    //DDA
-    int map_x;
-    int map_y;
-    double side_dist_x;
-    double side_dist_y;
-    double delta_dist_x;
-    double delta_dist_y;
-    int step_x;
-    int step_y;
-    int side;
-    double wall_dist;
-    int line_height;
-    int draw_start;
-    int draw_end;
-} t_ray;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	//DDA
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	double	wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}		t_ray;
 
 typedef struct s_cub
 {
-	t_data	*data;
-	t_window win;
-	t_img	img;
-	t_ray     ray;
+	t_data		*data;
+	t_window	win;
+	t_img		img;
+	t_ray		ray;
 }			t_cub;
 
 typedef struct s_param

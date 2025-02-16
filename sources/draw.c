@@ -187,3 +187,4 @@ void	draw_walls(t_cub *cub)
 	}
 	mlx_put_image_to_window(cub->win.mlx, cub->win.win_ptr, cub->win.img, 0, 0);
 }
+
