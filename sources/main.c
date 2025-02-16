@@ -103,6 +103,7 @@ void	draw_background(t_cub *cub)
 
 void	error_path(t_cub *cub)
 {
+	ft_putstr_fd("Error\nProblem with the image or path\n", 2);
 	free_images(cub);
 	free_data(cub->data);
 	mlx_destroy_display(cub->win.mlx);

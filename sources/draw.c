@@ -129,32 +129,67 @@ void	find_player_pos(t_cub *cub)
 	}
 }
 
-static void	draw_vertical_line(t_cub *cub, int x, int start, int end)
+static void draw_vertical_line(t_cub *cub, int x, int start, int end)
 {
-	int		y;
+	void	*texture;
+	char	*tex_addr;
+	int		tex_bpp;
+	int		tex_line_len;
+	int		tex_endian;
+	double	wall_x;
+	int		tex_x;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bpp;
+	int		line_len;
 	int		endian;
+	int		pixel; 
+	double	step;
+	double	tex_pos;
+	int		y;
+	int		tex_y;
+	int		tex_pixel;
 	int		color;
-	int		pixel;
 
-	if (!cub || !cub->win.img)
-		return ;
-	addr = mlx_get_data_addr(cub->win.img, &bits_per_pixel,
-			&line_length, &endian);
-	if (!addr)
-		return ;
-	if (cub->ray.side == 1)
-		color = 0x00FFFFFF;
+	if (cub->ray.side == 0)
+	{
+		if (cub->ray.ray_dir_x > 0)
+			texture = cub->img.east; 
+		else
+			texture = cub->img.west;
+	}
 	else
-		color = 0x00000000;
+	{
+		if (cub->ray.ray_dir_y > 0)
+			texture = cub->img.south;
+		else
+			texture = cub->img.north;
+	}
+	if (cub->ray.side == 0)
+		wall_x = cub->ray.pos_y + cub->ray.wall_dist * cub->ray.ray_dir_y;
+	else
+		wall_x = cub->ray.pos_x + cub->ray.wall_dist * cub->ray.ray_dir_x;
+	wall_x -= floor(wall_x);
+	tex_x = (int)(wall_x * 64);
+	if (cub->ray.side == 0 && cub->ray.ray_dir_x > 0)
+		tex_x = 64 - tex_x - 1;
+	if (cub->ray.side == 1 && cub->ray.ray_dir_y < 0)
+		tex_x = 64 - tex_x - 1;
+	tex_addr = mlx_get_data_addr(texture, &tex_bpp, &tex_line_len, &tex_endian);
+	addr = mlx_get_data_addr(cub->win.img, &bpp, &line_len, &endian);
+	step = 1.0 * 64 / (end - start);
+	tex_pos = (start - 1080 / 2 + (end - start) / 2) * step;
 	y = start;
 	while (y < end && y < 1080)
 	{
 		if (y >= 0)
 		{
-			pixel = y * line_length + x * (bits_per_pixel / 8);
+			tex_y = (int)tex_pos & 63;
+			tex_pos += step;
+			tex_pixel = tex_y * tex_line_len + tex_x * (tex_bpp / 8);
+			color = *(int*)(tex_addr + tex_pixel);
+			if (cub->ray.side == 1)
+				color = (color >> 1) & 8355711;
+			pixel = y * line_len + x * (bpp / 8);
 			addr[pixel] = color & 0xFF;
 			addr[pixel + 1] = (color >> 8) & 0xFF;
 			addr[pixel + 2] = (color >> 16) & 0xFF;
@@ -162,6 +197,40 @@ static void	draw_vertical_line(t_cub *cub, int x, int start, int end)
 		y++;
 	}
 }
+
+// static void	draw_vertical_line(t_cub *cub, int x, int start, int end)
+// {
+// 	int		y;
+// 	char	*addr;
+// 	int		bits_per_pixel;
+// 	int		line_length;
+// 	int		endian;
+// 	int		color;
+// 	int		pixel;
+
+// 	if (!cub || !cub->win.img)
+// 		return ;
+// 	addr = mlx_get_data_addr(cub->win.img, &bits_per_pixel,
+// 			&line_length, &endian);
+// 	if (!addr)
+// 		return ;
+// 	if (cub->ray.side == 1)
+// 		color = 0x00FFFFFF;
+// 	else
+// 		color = 0x00000000;
+// 	y = start;
+// 	while (y < end && y < 1080)
+// 	{
+// 		if (y >= 0)
+// 		{
+// 			pixel = y * line_length + x * (bits_per_pixel / 8);
+// 			addr[pixel] = color & 0xFF;
+// 			addr[pixel + 1] = (color >> 8) & 0xFF;
+// 			addr[pixel + 2] = (color >> 16) & 0xFF;
+// 		}
+// 		y++;
+// 	}
+// }
 
 void	draw_walls(t_cub *cub)
 {

@@ -1,15 +1,15 @@
 C 255,0,0
 
-                
-WE ./image/chien.xpm                  
+
+WE./image/64x64.xpm                  
 
 F 0,0,255
 
-NO            ./image/chat.xpm
+NO  ./image/bookshelf.xpm
 
-SO ./image/chat.xpm
+SO ./image/BrickOv.xpm
 
-EA ./image/chat.xpm
+EA ./image/Bricks.xpm 
 111
  10111111111
 11100000011
