@@ -8,6 +8,8 @@
 # include <math.h>
 # include "../minilibx-linux/mlx.h"
 
+# define HEIGHT 1080
+
 typedef struct s_keys {
 	int	w;
 	int	s;
@@ -72,7 +74,6 @@ typedef struct s_ray
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
-	//DDA
 	int		map_x;
 	int		map_y;
 	double	side_dist_x;
@@ -86,6 +87,7 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	int		original_line_height;
 }		t_ray;
 
 typedef struct s_cub

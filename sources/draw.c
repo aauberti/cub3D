@@ -59,22 +59,20 @@ static void	perform_dda(t_ray *ray, t_cub *cub)
 			hit = 1;
 	}
 	if (ray->side == 0)
-		ray->wall_dist = (ray->map_x - ray->pos_x
-				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
+		ray->wall_dist = (ray->map_x - ray->pos_x + (1 - ray->step_x) / 2)
+			/ ray->ray_dir_x;
 	else
-		ray->wall_dist = (ray->map_y - ray->pos_y
-				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
+		ray->wall_dist = (ray->map_y - ray->pos_y + (1 - ray->step_y) / 2)
+			/ ray->ray_dir_y;
 }
 
 static void	calculate_wall_height(t_ray *ray)
 {
-	ray->line_height = (int)(1080 / ray->wall_dist);
-	ray->draw_start = -ray->line_height / 2 + 1080 / 2;
-	ray->draw_end = ray->line_height / 2 + 1080 / 2;
+	ray->line_height = (int)(HEIGHT / ray->wall_dist);
+	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
+	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	if (ray->draw_end >= 1080)
-		ray->draw_end = 1080 - 1;
 }
 
 static void	init_player_dir(t_ray *ray, char dir)
@@ -129,7 +127,7 @@ void	find_player_pos(t_cub *cub)
 	}
 }
 
-static void draw_vertical_line(t_cub *cub, int x, int start, int end)
+static void	draw_vertical_line(t_cub *cub, int x, int start, int end)
 {
 	void	*texture;
 	char	*tex_addr;
@@ -142,7 +140,7 @@ static void draw_vertical_line(t_cub *cub, int x, int start, int end)
 	int		bpp;
 	int		line_len;
 	int		endian;
-	int		pixel; 
+	int		pixel;
 	double	step;
 	double	tex_pos;
 	int		y;
@@ -153,16 +151,16 @@ static void draw_vertical_line(t_cub *cub, int x, int start, int end)
 	if (cub->ray.side == 0)
 	{
 		if (cub->ray.ray_dir_x > 0)
-			texture = cub->img.east; 
-		else
 			texture = cub->img.west;
+		else
+			texture = cub->img.east;
 	}
 	else
 	{
 		if (cub->ray.ray_dir_y > 0)
-			texture = cub->img.south;
-		else
 			texture = cub->img.north;
+		else
+			texture = cub->img.south;
 	}
 	if (cub->ray.side == 0)
 		wall_x = cub->ray.pos_y + cub->ray.wall_dist * cub->ray.ray_dir_y;
@@ -176,17 +174,27 @@ static void draw_vertical_line(t_cub *cub, int x, int start, int end)
 		tex_x = 64 - tex_x - 1;
 	tex_addr = mlx_get_data_addr(texture, &tex_bpp, &tex_line_len, &tex_endian);
 	addr = mlx_get_data_addr(cub->win.img, &bpp, &line_len, &endian);
-	step = (double)64 / (end - start);
-	tex_pos = (start - 1080 / 2 + (end - start) / 2) * step;
+		step = (double)64 / cub->ray.line_height;
+		tex_pos = (start - HEIGHT / 2 + cub->ray.line_height / 2) * step;
+	// if (cub->ray.line_height > HEIGHT)
+	// {
+	// 	step = (double)64 / cub->ray.line_height;
+	// 	tex_pos = (start - HEIGHT / 2 + cub->ray.line_height / 2) * step;
+	// }
+	// else
+	// {
+	// 	step = (double)64 / (end - start);
+	// 	tex_pos = 0;
+	// }
 	y = start;
-	while (y < end && y < 1080)
+	while (y < end && y < HEIGHT)
 	{
 		if (y >= 0)
 		{
 			tex_y = (int)tex_pos & 63;
 			tex_pos += step;
 			tex_pixel = tex_y * tex_line_len + tex_x * (tex_bpp / 8);
-			color = *(int*)(tex_addr + tex_pixel);
+			color = *(int *)(tex_addr + tex_pixel);
 			if (cub->ray.side == 1)
 				color = (color >> 1) & 8355711;
 			pixel = y * line_len + x * (bpp / 8);
@@ -198,7 +206,7 @@ static void draw_vertical_line(t_cub *cub, int x, int start, int end)
 	}
 }
 
-void draw_walls(t_cub *cub)
+void	draw_walls(t_cub *cub)
 {
 	t_img_data	img_data;
 	int			x;
@@ -207,17 +215,13 @@ void draw_walls(t_cub *cub)
 	int			color_floor;
 
 	if (!cub || !cub->data || !cub->data->map || !cub->win.img)
-		return;
+		return ;
 	img_data.addr = mlx_get_data_addr(cub->win.img, &img_data.bits_per_pixel,
 			&img_data.line_length, &img_data.endian);
-	color_ceiling = (cub->data->c_color->r << 16) | 
-				   (cub->data->c_color->g << 8) | 
-				   cub->data->c_color->b;
-	color_floor = (cub->data->f_color->r << 16) | 
-				  (cub->data->f_color->g << 8) | 
-				  cub->data->f_color->b;
-	draw_section(&img_data, 0, 1080 / 2, color_ceiling);
-	draw_section(&img_data, 1080 / 2, 1080, color_floor);
+	color_ceiling = (cub->data->c_color->r << 16) | (cub->data->c_color->g << 8) | cub->data->c_color->b;
+	color_floor = (cub->data->f_color->r << 16) | (cub->data->f_color->g << 8) | cub->data->f_color->b;
+	draw_section(&img_data, 0, HEIGHT / 2, color_ceiling);
+	draw_section(&img_data, HEIGHT / 2, HEIGHT, color_floor);
 	ray = &cub->ray;
 	x = 0;
 	while (x < 1920)
@@ -231,6 +235,5 @@ void draw_walls(t_cub *cub)
 		draw_vertical_line(cub, x, ray->draw_start, ray->draw_end);
 		x++;
 	}
-
 	mlx_put_image_to_window(cub->win.mlx, cub->win.win_ptr, cub->win.img, 0, 0);
 }

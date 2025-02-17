@@ -46,8 +46,7 @@ bool	init_img(t_cub *cub)
 	return (true);
 }
 
-void	draw_section(t_img_data *img_data, int y_start
-	, int y_end, int color)
+void	draw_section(t_img_data *img_data, int y_start, int y_end, int color)
 {
 	int	x;
 	int	y;
@@ -59,8 +58,8 @@ void	draw_section(t_img_data *img_data, int y_start
 		x = 0;
 		while (x < 1920)
 		{
-			pixel = y * img_data->line_length + x
-				* (img_data->bits_per_pixel / 8);
+			pixel = y * img_data->line_length + x * (img_data->bits_per_pixel
+					/ 8);
 			img_data->addr[pixel] = color & 0xFF;
 			img_data->addr[pixel + 1] = (color >> 8) & 0xFF;
 			img_data->addr[pixel + 2] = (color >> 16) & 0xFF;
@@ -81,15 +80,15 @@ void	error_path(t_cub *cub)
 	exit(0);
 }
 
-int key_press(int keycode, t_cub *cub)
+int	key_press(int keycode, t_cub *cub)
 {
-	if (keycode == 119) 
+	if (keycode == 119)
 		cub->keys.w = 1;
-	if (keycode == 115) 
+	if (keycode == 115)
 		cub->keys.s = 1;
 	if (keycode == 97)
 		cub->keys.a = 1;
-	if (keycode == 100) 
+	if (keycode == 100)
 		cub->keys.d = 1;
 	if (keycode == 65363)
 		cub->keys.left = 1;
@@ -100,7 +99,7 @@ int key_press(int keycode, t_cub *cub)
 	return (0);
 }
 
-int key_release(int keycode, t_cub *cub)
+int	key_release(int keycode, t_cub *cub)
 {
 	if (keycode == 119)
 		cub->keys.w = 0;
@@ -117,69 +116,85 @@ int key_release(int keycode, t_cub *cub)
 	return (0);
 }
 
-void move_player(t_cub *cub)
+void	move_player(t_cub *cub)
 {
-	double move_speed;
-	double rot_speed;
-	double old_dir_x;
-	double old_plane_x;
+	double	move_speed;
+	double	rot_speed;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	move_speed = 0.04;
-	rot_speed = 0.015;
-
+	move_speed = 0.049;
+	rot_speed = 0.1;
 	if (cub->keys.w)
 	{
-		if (cub->data->map[(int)(cub->ray.pos_y)][(int)(cub->ray.pos_x + cub->ray.dir_x * move_speed)] != '1')
+		if (cub->data->map[(int)(cub->ray.pos_y)][(int)(cub->ray.pos_x
+				+ cub->ray.dir_x * move_speed)] != '1')
 			cub->ray.pos_x += cub->ray.dir_x * move_speed;
-		if (cub->data->map[(int)(cub->ray.pos_y + cub->ray.dir_y * move_speed)][(int)(cub->ray.pos_x)] != '1')
+		if (cub->data->map[(int)(cub->ray.pos_y + cub->ray.dir_y
+				* move_speed)][(int)(cub->ray.pos_x)] != '1')
 			cub->ray.pos_y += cub->ray.dir_y * move_speed;
 	}
 	if (cub->keys.s)
 	{
-		if (cub->data->map[(int)(cub->ray.pos_y)][(int)(cub->ray.pos_x - cub->ray.dir_x * move_speed)] != '1')
+		if (cub->data->map[(int)(cub->ray.pos_y)][(int)(cub->ray.pos_x
+				- cub->ray.dir_x * move_speed)] != '1')
 			cub->ray.pos_x -= cub->ray.dir_x * move_speed;
-		if (cub->data->map[(int)(cub->ray.pos_y - cub->ray.dir_y * move_speed)][(int)(cub->ray.pos_x)] != '1')
+		if (cub->data->map[(int)(cub->ray.pos_y - cub->ray.dir_y
+				* move_speed)][(int)(cub->ray.pos_x)] != '1')
 			cub->ray.pos_y -= cub->ray.dir_y * move_speed;
 	}
-		if (cub->keys.d)
+	if (cub->keys.d)
 	{
-		if (cub->data->map[(int)(cub->ray.pos_y)][(int)(cub->ray.pos_x - cub->ray.dir_y * move_speed)] != '1')
+		if (cub->data->map[(int)(cub->ray.pos_y)][(int)(cub->ray.pos_x
+				- cub->ray.dir_y * move_speed)] != '1')
 			cub->ray.pos_x -= cub->ray.dir_y * move_speed;
-		if (cub->data->map[(int)(cub->ray.pos_y + cub->ray.dir_x * move_speed)][(int)(cub->ray.pos_x)] != '1')
+		if (cub->data->map[(int)(cub->ray.pos_y + cub->ray.dir_x
+				* move_speed)][(int)(cub->ray.pos_x)] != '1')
 			cub->ray.pos_y += cub->ray.dir_x * move_speed;
 	}
 	if (cub->keys.a)
 	{
-		if (cub->data->map[(int)(cub->ray.pos_y)][(int)(cub->ray.pos_x + cub->ray.dir_y * move_speed)] != '1')
+		if (cub->data->map[(int)(cub->ray.pos_y)][(int)(cub->ray.pos_x
+				+ cub->ray.dir_y * move_speed)] != '1')
 			cub->ray.pos_x += cub->ray.dir_y * move_speed;
-		if (cub->data->map[(int)(cub->ray.pos_y - cub->ray.dir_x * move_speed)][(int)(cub->ray.pos_x)] != '1')
+		if (cub->data->map[(int)(cub->ray.pos_y - cub->ray.dir_x
+				* move_speed)][(int)(cub->ray.pos_x)] != '1')
 			cub->ray.pos_y -= cub->ray.dir_x * move_speed;
 	}
 	if (cub->keys.right)
 	{
 		old_dir_x = cub->ray.dir_x;
-		cub->ray.dir_x = cub->ray.dir_x * cos(-rot_speed) - cub->ray.dir_y * sin(-rot_speed);
-		cub->ray.dir_y = old_dir_x * sin(-rot_speed) + cub->ray.dir_y * cos(-rot_speed);
+		cub->ray.dir_x = cub->ray.dir_x * cos(-rot_speed) - cub->ray.dir_y
+			* sin(-rot_speed);
+		cub->ray.dir_y = old_dir_x * sin(-rot_speed) + cub->ray.dir_y
+			* cos(-rot_speed);
 		old_plane_x = cub->ray.plane_x;
-		cub->ray.plane_x = cub->ray.plane_x * cos(-rot_speed) - cub->ray.plane_y * sin(-rot_speed);
-		cub->ray.plane_y = old_plane_x * sin(-rot_speed) + cub->ray.plane_y * cos(-rot_speed);
+		cub->ray.plane_x = cub->ray.plane_x * cos(-rot_speed) - cub->ray.plane_y
+			* sin(-rot_speed);
+		cub->ray.plane_y = old_plane_x * sin(-rot_speed) + cub->ray.plane_y
+			* cos(-rot_speed);
 	}
 	if (cub->keys.left)
 	{
 		old_dir_x = cub->ray.dir_x;
-		cub->ray.dir_x = cub->ray.dir_x * cos(rot_speed) - cub->ray.dir_y * sin(rot_speed);
-		cub->ray.dir_y = old_dir_x * sin(rot_speed) + cub->ray.dir_y * cos(rot_speed);
+		cub->ray.dir_x = cub->ray.dir_x * cos(rot_speed) - cub->ray.dir_y
+			* sin(rot_speed);
+		cub->ray.dir_y = old_dir_x * sin(rot_speed) + cub->ray.dir_y
+			* cos(rot_speed);
 		old_plane_x = cub->ray.plane_x;
-		cub->ray.plane_x = cub->ray.plane_x * cos(rot_speed) - cub->ray.plane_y * sin(rot_speed);
-		cub->ray.plane_y = old_plane_x * sin(rot_speed) + cub->ray.plane_y * cos(rot_speed);
+		cub->ray.plane_x = cub->ray.plane_x * cos(rot_speed) - cub->ray.plane_y
+			* sin(rot_speed);
+		cub->ray.plane_y = old_plane_x * sin(rot_speed) + cub->ray.plane_y
+			* cos(rot_speed);
 	}
 }
 
-int render(t_cub *cub)
+int	render(t_cub *cub)
 {
-	void *old_img = cub->win.img;
-	
-	cub->win.img = mlx_new_image(cub->win.mlx, 1920, 1080);
+	void	*old_img;
+
+	old_img = cub->win.img;
+	cub->win.img = mlx_new_image(cub->win.mlx, 1920, HEIGHT);
 	if (!cub->win.img)
 		return (1);
 	move_player(cub);
@@ -189,7 +204,7 @@ int render(t_cub *cub)
 	return (0);
 }
 
-static int close_window(t_cub *cub)
+static int	close_window(t_cub *cub)
 {
 	mlx_loop_end(cub->win.mlx);
 	free_images(cub);
@@ -219,11 +234,11 @@ void	init_cub(t_data *data)
 		return (error_path(cub));
 	if (!cub->win.mlx)
 		return (free(cub));
-	cub->win.win_ptr = mlx_new_window(cub->win.mlx, 1920, 1080, "cub3D");
+	cub->win.win_ptr = mlx_new_window(cub->win.mlx, 1920, HEIGHT, "cub3D");
 	find_player_pos(cub);
 	mlx_hook(cub->win.win_ptr, 17, 0, close_window, cub);
-	mlx_hook(cub->win.win_ptr, 2, 1L<<0, key_press, cub);
-	mlx_hook(cub->win.win_ptr, 3, 1L<<1, key_release, cub);
+	mlx_hook(cub->win.win_ptr, 2, 1L << 0, key_press, cub);
+	mlx_hook(cub->win.win_ptr, 3, 1L << 1, key_release, cub);
 	mlx_loop_hook(cub->win.mlx, render, cub);
 	mlx_loop(cub->win.mlx);
 }
@@ -251,4 +266,3 @@ int	main(int ac, char **av)
 	free_data(data);
 	return (0);
 }
-
