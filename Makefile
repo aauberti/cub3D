@@ -1,69 +1,71 @@
-NAME	= cub3D
+NAME		= cub3D
+MFLAGS 		= --no-print-directory
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -g
 
-MFLAGS = --no-print-directory
-CC		= cc
-CFLAGS	= -Werror -Wextra -Wall -g
+# Directories
+SRC_DIR		= ./src
+OBJ_DIR		= ./obj
+INC_DIR		= ./includes
+LIBFT_DIR	= ./libft
+MLX_DIR		= ./minilibx-linux
 
-SRC_PATH = ./sources/
-OBJ_PATH = ./objects/
-INC_PATH = ./includes/
-
-MLX_DIR = minilibx-linux
-MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
-
-LIBFT_PATH = ./libft/
-LIBFT = ./libft/libft.a
-
+# Source files
 SRC		= 	main.c \
-			parsing/check_param.c \
+			hooks.c \
+			memory.c \
+			render.c \
+			movement.c \
+			parsing/check_cell.c \
 			parsing/init_data.c \
+			parsing/parse_elem.c \
+			parsing/parse_map.c \
+			parsing/parsing_utils.c \
+			parsing/check_param.c \
 			parsing/valid_path.c \
 			parsing/valid_color.c \
-			parsing/parse_elem.c \
-			free_data.c \
-			parsing/parse_map.c \
-			parsing/check_cell.c \
-			parsing/parsing_utils.c \
-			draw.c \
+			parsing/free_data.c \
+			render/draw.c \
+			render/draw_utils.c \
+			render/dda.c \
+			render/texture.c \
+			render/vertical_line.c
 
-			
-			
+OBJS	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+INC		= -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
+LIBS	= $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.a
 
-OBJS	= $(addprefix $(OBJ_PATH), $(SRC:.c=.o))
-INC		= -I $(INC_PATH) -I $(LIBFT_PATH) -I $(MLX_DIR)
+# Libraries flags
+MLX_FLAGS	= -lX11 -lXext -lm
 
+all: $(NAME)
 
-all: $(LIBFT) $(MLX_LIB) $(NAME)
-
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
+	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
-$(NAME): $(LIBFT) $(OBJS)
-	@echo "Linking $(NAME)..."
-	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) -lXext -lX11 -lm -o $@ $(INC) $(LIBFT) 
-	@echo "\033[32m$(NAME) created!\033[0m"
-
-$(LIBFT):
+$(NAME): $(OBJS)
 	@echo "Making libft..."
-	@make $(MFLAGS) -C $(LIBFT_PATH)
-
-$(MLX_LIB):
+	@make $(MFLAGS) -C $(LIBFT_DIR)
 	@echo "Making minilibx..."
 	@make $(MFLAGS) -C $(MLX_DIR)
+	@echo "Linking $(NAME)..."
+	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIBS) $(MLX_FLAGS)
+	@echo "\033[32m$(NAME) created!\033[0m"
 
 clean:
 	@echo "Cleaning object files..."
-	@rm -rf $(OBJ_PATH)
-	@make $(MFLAGS) -C $(LIBFT_PATH) clean
+	@rm -rf $(OBJ_DIR)
+	@make $(MFLAGS) -C $(LIBFT_DIR) clean
 	@if [ -d $(MLX_DIR) ]; then make $(MFLAGS) -C $(MLX_DIR) clean; fi
 
 fclean: clean
 	@echo "Cleaning executable..."
 	@rm -f $(NAME)
-	@make $(MFLAGS) -C $(LIBFT_PATH) fclean
+	@make $(MFLAGS) -C $(LIBFT_DIR) fclean
 	@if [ -d $(MLX_DIR) ]; then make $(MFLAGS) -C $(MLX_DIR) clean; fi
 
 re: fclean all
 
-.PHONY: all re clean fclean
+.PHONY: all clean fclean re

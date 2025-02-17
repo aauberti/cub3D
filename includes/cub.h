@@ -1,5 +1,5 @@
-#ifndef CUB_H
-# define CUB_H
+#ifndef __CUB_H__
+# define __CUB_H__
 
 # include "libft.h"
 # include <stdbool.h>
@@ -10,7 +10,8 @@
 
 # define HEIGHT 1080
 
-typedef struct s_keys {
+typedef struct s_keys
+{
 	int	w;
 	int	s;
 	int	a;
@@ -40,20 +41,20 @@ typedef struct s_data
 
 typedef struct s_window
 {
-	void		*mlx;
-	void		*win_ptr;
-	int			img_width;
-	int			img_height;
-	void		*img;
-}				t_window;
+	void	*mlx;
+	void	*win_ptr;
+	int		img_width;
+	int		img_height;
+	void	*img;
+}	t_window;
 
 typedef struct s_img
 {
-	void		*north;
-	void		*south;
-	void		*east;
-	void		*west;
-}				t_img;
+	void	*north;
+	void	*south;
+	void	*east;
+	void	*west;
+}	t_img;
 
 typedef struct s_img_data
 {
@@ -61,9 +62,9 @@ typedef struct s_img_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}		t_img_data;
+}	t_img_data;
 
-typedef struct s_ray 
+typedef struct s_ray
 {
 	double	pos_x;
 	double	pos_y;
@@ -88,7 +89,7 @@ typedef struct s_ray
 	int		draw_start;
 	int		draw_end;
 	int		original_line_height;
-}		t_ray;
+}	t_ray;
 
 typedef struct s_cub
 {
@@ -97,17 +98,73 @@ typedef struct s_cub
 	t_img		img;
 	t_ray		ray;
 	t_keys		keys;
-}			t_cub;
+}	t_cub;
 
 typedef struct s_param
 {
-	int		i;
-	int		height;
-	int		prev_len;
-}		t_param;
+	int	i;
+	int	height;
+	int	prev_len;
+}	t_param;
 
+typedef struct s_line_vars
+{
+	void	*texture;
+	char	*tex_addr;
+	int		tex_bpp;
+	int		tex_line_len;
+	int		tex_endian;
+	double	wall_x;
+	int		tex_x;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	double	step;
+	double	tex_pos;
+	int		x;
+}	t_line_vars;
 
-//Parsing
+/* Main function prototypes */
+void	init_cub(t_data *data);
+int		end(t_cub *cub);
+int		close_window(t_cub *cub);
+
+/* Hooks */
+void	setup_hooks(t_cub *cub);
+void	move_player(t_cub *cub);
+int		key_press(int keycode, t_cub *cub);
+int		key_release(int keycode, t_cub *cub);
+int		render(t_cub *cub);
+
+/* Memory management */
+void	free_images(t_cub *cub);
+void	free_data(t_data *data);
+void	free_string_array(char **array);
+bool	free_false(char *str);
+
+/* Drawing */
+void	draw_walls(t_cub *cub);
+void	draw_section(t_img_data *img_data, int y_start, int y_end, int color);
+void	draw_vertical_line(t_cub *cub, int x, int start, int end);
+
+/* Ray calculations */
+void	calc_ray_pos(t_ray *ray, int x);
+void	init_dda(t_ray *ray);
+void	init_step_and_side_dist(t_ray *ray);
+void	perform_dda(t_ray *ray, t_cub *cub);
+void	calculate_wall_dist(t_ray *ray);
+void	calculate_wall_height(t_ray *ray);
+
+/* Texture management */
+void	*get_texture(t_cub *cub, t_ray *ray);
+void	calc_texture_x(t_ray *ray, double *wall_x, int *tex_x);
+
+/* Initialization */
+bool	init_img(t_cub *cub);
+void	find_player_pos(t_cub *cub);
+
+/* Parsing */
 bool	check_param(int ac, char **av);
 t_data	*init_data(int fd);
 bool	valid_path(t_data *data, char *line);
@@ -122,14 +179,5 @@ int		check_cell(char **map, int j, int curr_len, t_param *param);
 bool	ft_valid_char(char c, char *charset);
 bool	error_in_map(t_data *data, char *tmp);
 bool	valid_start(char *str);
-void	free_string_array(char **array);
-void	free_data(t_data *data);
-bool	free_false(char *str);
-
-
-void draw_walls(t_cub *cub);
-void find_player_pos(t_cub *cub);
-void	draw_section(t_img_data *img_data, int y_start
-	, int y_end, int color);
 
 #endif
