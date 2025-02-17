@@ -168,7 +168,7 @@ static void draw_vertical_line(t_cub *cub, int x, int start, int end)
 		wall_x = cub->ray.pos_y + cub->ray.wall_dist * cub->ray.ray_dir_y;
 	else
 		wall_x = cub->ray.pos_x + cub->ray.wall_dist * cub->ray.ray_dir_x;
-	wall_x -= floor(wall_x);
+	wall_x = wall_x - floor(wall_x);
 	tex_x = (int)(wall_x * 64);
 	if (cub->ray.side == 0 && cub->ray.ray_dir_x > 0)
 		tex_x = 64 - tex_x - 1;
@@ -176,7 +176,7 @@ static void draw_vertical_line(t_cub *cub, int x, int start, int end)
 		tex_x = 64 - tex_x - 1;
 	tex_addr = mlx_get_data_addr(texture, &tex_bpp, &tex_line_len, &tex_endian);
 	addr = mlx_get_data_addr(cub->win.img, &bpp, &line_len, &endian);
-	step = 1.0 * 64 / (end - start);
+	step = (double)64 / (end - start);
 	tex_pos = (start - 1080 / 2 + (end - start) / 2) * step;
 	y = start;
 	while (y < end && y < 1080)
@@ -198,50 +198,27 @@ static void draw_vertical_line(t_cub *cub, int x, int start, int end)
 	}
 }
 
-// static void	draw_vertical_line(t_cub *cub, int x, int start, int end)
-// {
-// 	int		y;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// 	int		color;
-// 	int		pixel;
-
-// 	if (!cub || !cub->win.img)
-// 		return ;
-// 	addr = mlx_get_data_addr(cub->win.img, &bits_per_pixel,
-// 			&line_length, &endian);
-// 	if (!addr)
-// 		return ;
-// 	if (cub->ray.side == 1)
-// 		color = 0x00FFFFFF;
-// 	else
-// 		color = 0x00000000;
-// 	y = start;
-// 	while (y < end && y < 1080)
-// 	{
-// 		if (y >= 0)
-// 		{
-// 			pixel = y * line_length + x * (bits_per_pixel / 8);
-// 			addr[pixel] = color & 0xFF;
-// 			addr[pixel + 1] = (color >> 8) & 0xFF;
-// 			addr[pixel + 2] = (color >> 16) & 0xFF;
-// 		}
-// 		y++;
-// 	}
-// }
-
-void	draw_walls(t_cub *cub)
+void draw_walls(t_cub *cub)
 {
-	int		x;
-	t_ray	*ray;
+	t_img_data	img_data;
+	int			x;
+	t_ray		*ray;
+	int			color_ceiling;
+	int			color_floor;
 
-	if (!cub || !cub->data || !cub->data->map)
-		return ;
+	if (!cub || !cub->data || !cub->data->map || !cub->win.img)
+		return;
+	img_data.addr = mlx_get_data_addr(cub->win.img, &img_data.bits_per_pixel,
+			&img_data.line_length, &img_data.endian);
+	color_ceiling = (cub->data->c_color->r << 16) | 
+				   (cub->data->c_color->g << 8) | 
+				   cub->data->c_color->b;
+	color_floor = (cub->data->f_color->r << 16) | 
+				  (cub->data->f_color->g << 8) | 
+				  cub->data->f_color->b;
+	draw_section(&img_data, 0, 1080 / 2, color_ceiling);
+	draw_section(&img_data, 1080 / 2, 1080, color_floor);
 	ray = &cub->ray;
-	if (!ray)
-		return ;
 	x = 0;
 	while (x < 1920)
 	{
@@ -254,6 +231,6 @@ void	draw_walls(t_cub *cub)
 		draw_vertical_line(cub, x, ray->draw_start, ray->draw_end);
 		x++;
 	}
+
 	mlx_put_image_to_window(cub->win.mlx, cub->win.win_ptr, cub->win.img, 0, 0);
 }
-

@@ -8,6 +8,15 @@
 # include <math.h>
 # include "../minilibx-linux/mlx.h"
 
+typedef struct s_keys {
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
+
 typedef struct s_color
 {
 	int	r;
@@ -85,6 +94,7 @@ typedef struct s_cub
 	t_window	win;
 	t_img		img;
 	t_ray		ray;
+	t_keys		keys;
 }			t_cub;
 
 typedef struct s_param
@@ -117,5 +127,7 @@ bool	free_false(char *str);
 
 void draw_walls(t_cub *cub);
 void find_player_pos(t_cub *cub);
+void	draw_section(t_img_data *img_data, int y_start
+	, int y_end, int color);
 
 #endif
