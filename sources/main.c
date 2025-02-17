@@ -123,8 +123,8 @@ void	move_player(t_cub *cub)
 	double	old_dir_x;
 	double	old_plane_x;
 
-	move_speed = 0.049;
-	rot_speed = 0.1;
+	move_speed = 0.045;
+	rot_speed = 0.05;
 	if (cub->keys.w)
 	{
 		if (cub->data->map[(int)(cub->ray.pos_y)][(int)(cub->ray.pos_x
