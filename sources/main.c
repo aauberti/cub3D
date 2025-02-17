@@ -228,7 +228,10 @@ void	init_cub(t_data *data)
 	cub->data = data;
 	cub->win.mlx = mlx_init();
 	if (!cub->win.mlx)
+	{
+		free(cub);
 		return ;
+	}
 	ft_memset(&cub->img, 0, sizeof(t_img));
 	if (!init_img(cub))
 		return (error_path(cub));
