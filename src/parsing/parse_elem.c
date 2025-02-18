@@ -6,7 +6,7 @@
 /*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 08:53:48 by aauberti          #+#    #+#             */
-/*   Updated: 2025/02/18 08:53:49 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:20:54 by aauberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ t_data	*parse_map(t_data *data, char *line, int fd)
 		free(line);
 		free(data->map_line);
 		data->map_line = ft_strdup(tmp);
+		if (ft_strlen(data->map_line) > 25000)
+		{
+			ft_putstr_fd("Error\nMap too large\n", 2);
+			free(tmp);
+			free_data(data);
+			return (NULL);
+		}
 		free(tmp);
 	}
 	return (data);

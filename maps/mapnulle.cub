@@ -1,0 +1,25 @@
+C 255,0,0
+
+F 0,010,255
+
+
+             WE ./image/64x64.xpm                  
+NO  ./image/bookshelf.xpm
+SO ./image/BrickOv.xpm
+EA ./image/Bricks.xpm 
+
+
+ATTENTION SEGFAULT vide en haut et en bas avec un 0 (sur les cote ca va)
+101
+10111111111
+10100000011
+100000001
+100S010111
+10010101011
+101111011101
+101 1000111
+101  1011111
+1011  1
+10111
+10001
+11111
