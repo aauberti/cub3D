@@ -1,5 +1,17 @@
-#ifndef __CUB_H__
-# define __CUB_H__
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 08:54:17 by aauberti          #+#    #+#             */
+/*   Updated: 2025/02/18 08:54:18 by aauberti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB_H
+# define CUB_H
 
 # include "libft.h"
 # include <stdbool.h>
@@ -88,7 +100,6 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		original_line_height;
 }	t_ray;
 
 typedef struct s_cub

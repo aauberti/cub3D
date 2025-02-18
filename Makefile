@@ -3,14 +3,12 @@ MFLAGS 		= --no-print-directory
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g
 
-# Directories
 SRC_DIR		= ./src
 OBJ_DIR		= ./obj
 INC_DIR		= ./includes
 LIBFT_DIR	= ./libft
 MLX_DIR		= ./minilibx-linux
 
-# Source files
 SRC		= 	main.c \
 			hooks.c \
 			memory.c \
@@ -35,14 +33,12 @@ OBJS	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 INC		= -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 LIBS	= $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.a
 
-# Libraries flags
 MLX_FLAGS	= -lX11 -lXext -lm
 
 all: $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(NAME): $(OBJS)
