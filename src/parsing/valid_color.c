@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaubertin <aaubertin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 08:53:41 by aauberti          #+#    #+#             */
-/*   Updated: 2025/02/18 10:27:10 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:21:24 by aaubertin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,9 @@ static bool	split_rgb_f_color(t_data *data, char *rgb, int i)
 	free(rgb);
 	if (!tmp || (tmp[0] && (tmp[0] == ',' || tmp[ft_strlen(tmp) -1] == ',')))
 		return (free_false(tmp));
-	while(tmp[i])
-	{
+	while (tmp[i++])
 		if (tmp[i] == ',' && tmp[i + 1] == ',')
 			return (free_false(tmp));
-		i++;
-	}
 	i = 0;
 	color = ft_split(tmp, ',');
 	free(tmp);
@@ -84,12 +81,9 @@ static bool	split_rgb_c_color(t_data *data, char *rgb, int i)
 	free(rgb);
 	if (!tmp || (tmp[0] && (tmp[0] == ',' || tmp[ft_strlen(tmp) -1] == ',')))
 		return (free_false(tmp));
-	while(tmp[i])
-	{
+	while (tmp[i++])
 		if (tmp[i] == ',' && tmp[i + 1] == ',')
 			return (free_false(tmp));
-		i++;
-	}
 	i = 0;
 	color = ft_split(tmp, ',');
 	free(tmp);

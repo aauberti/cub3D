@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaubertin <aaubertin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 08:54:03 by aauberti          #+#    #+#             */
-/*   Updated: 2025/02/18 08:54:04 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:16:34 by aaubertin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ static int	check_cell_down(char **map, int i, int j, int height)
 
 int	check_cell(char **map, int j, int curr_len, t_param *param)
 {
+	if ((param->i == 0 || param->i == param->height - 1)
+		&& (map[param->i][j] == '0' || ft_strchr("NSEW", map[param->i][j])))
+		return (0);
 	if (map[param->i][j] != '0' && map[param->i][j] != 'N'
 		&& map[param->i][j] != 'S' && map[param->i][j] != 'W'
 		&& map[param->i][j] != 'E')

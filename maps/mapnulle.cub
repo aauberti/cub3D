@@ -9,8 +9,7 @@ SO ./image/BrickOv.xpm
 EA ./image/Bricks.xpm 
 
 
-ATTENTION SEGFAULT vide en haut et en bas avec un 0 (sur les cote ca va)
-101
+111
 10111111111
 10100000011
 100000001
@@ -18,8 +17,8 @@ ATTENTION SEGFAULT vide en haut et en bas avec un 0 (sur les cote ca va)
 10010101011
 101111011101
 101 1000111
-101  1011111
-1011  1
+101  1111111
+1011  
 10111
 10001
 11111
