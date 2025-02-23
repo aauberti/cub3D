@@ -6,7 +6,7 @@
 /*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 08:53:54 by aauberti          #+#    #+#             */
-/*   Updated: 2025/02/18 10:18:24 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/23 16:50:54 by aauberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_ptr(void *ptr)
 	}
 }
 
-void	free_string_array(char **array)
+bool	free_string_array(char **array)
 {
 	int	i;
 
@@ -37,6 +37,7 @@ void	free_string_array(char **array)
 		free(array);
 		array = NULL;
 	}
+	return (false);
 }
 
 bool	free_false(char *str)

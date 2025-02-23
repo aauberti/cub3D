@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   valid_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaubertin <aaubertin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 08:53:41 by aauberti          #+#    #+#             */
-/*   Updated: 2025/02/19 12:21:24 by aaubertin        ###   ########.fr       */
+/*   Updated: 2025/02/23 17:02:30 by aauberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-static int	convert_string_to_long(const char *str, bool *error)
-{
-	int	nbr;
-	int	i;
-
-	nbr = 0;
-	i = 0;
-	while (str && str[i])
-	{
-		if (!ft_isdigit(str[i]))
-		{
-			*error = false;
-			break ;
-		}
-		nbr = (nbr * 10) + (str[i] - '0');
-		if (nbr > 255 || nbr < 0)
-		{
-			*error = false;
-			break ;
-		}
-		i++;
-	}
-	return (nbr);
-}
 
 static bool	split_rgb_f_color(t_data *data, char *rgb, int i)
 {
@@ -57,13 +32,8 @@ static bool	split_rgb_f_color(t_data *data, char *rgb, int i)
 	while (color && color[i])
 		i++;
 	if (!color || i != 3)
-	{
-		free_string_array(color);
-		return (false);
-	}
-	data->f_color->r = convert_string_to_long(color[0], &error);
-	data->f_color->g = convert_string_to_long(color[1], &error);
-	data->f_color->b = convert_string_to_long(color[2], &error);
+		return (free_string_array(color));
+	stock_color_f(data, color, &error);
 	free_string_array(color);
 	if (!error)
 		return (false);
@@ -90,13 +60,8 @@ static bool	split_rgb_c_color(t_data *data, char *rgb, int i)
 	while (color && color[i])
 		i++;
 	if (!color || i != 3)
-	{
-		free_string_array(color);
-		return (false);
-	}
-	data->c_color->r = convert_string_to_long(color[0], &error);
-	data->c_color->g = convert_string_to_long(color[1], &error);
-	data->c_color->b = convert_string_to_long(color[2], &error);
+		return (free_string_array(color));
+	stock_color_c(data, color, &error);
 	free_string_array(color);
 	if (!error)
 		return (false);

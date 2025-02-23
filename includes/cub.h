@@ -6,7 +6,7 @@
 /*   By: aauberti <aauberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 08:54:17 by aauberti          #+#    #+#             */
-/*   Updated: 2025/02/18 08:54:18 by aauberti         ###   ########.fr       */
+/*   Updated: 2025/02/23 17:01:05 by aauberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int		render(t_cub *cub);
 /* Memory management */
 void	free_images(t_cub *cub);
 void	free_data(t_data *data);
-void	free_string_array(char **array);
+bool	free_string_array(char **array);
 bool	free_false(char *str);
 
 /* Drawing */
@@ -190,5 +190,7 @@ int		check_cell(char **map, int j, int curr_len, t_param *param);
 bool	ft_valid_char(char c, char *charset);
 bool	error_in_map(t_data *data, char *tmp);
 bool	valid_start(char *str);
+void	stock_color_f(t_data *data, char **color, bool *error);
+void	stock_color_c(t_data *data, char **color, bool *error);
 
 #endif

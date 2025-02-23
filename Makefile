@@ -22,6 +22,7 @@ SRC		= 	main.c \
 			parsing/check_param.c \
 			parsing/valid_path.c \
 			parsing/valid_color.c \
+			parsing/valid_color_utils.c \
 			parsing/free_data.c \
 			render/draw.c \
 			render/draw_utils.c \
